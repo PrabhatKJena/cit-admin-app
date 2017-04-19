@@ -20,4 +20,10 @@ public class LoginController {
         model.put("uname", uname);
         return "Login";
     }
+
+    @RequestMapping(value = "/login1", method = {RequestMethod.GET})
+    public String login1(Map<String, String> model) {
+        model.put("uname", "Login1");
+        return "Login";
+    }
 }
