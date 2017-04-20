@@ -8,23 +8,18 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "user_groups")
-public class UserGroupsEntity {
+public class UserGroupsEntity extends BaseEntity {
     @Id
     @Column(name = "group_id")
     private Byte groupId;
-    @Column(name = "group_name")
+    @Column(name = "group_name", nullable = false)
     private String groupName;
-    @Column(name = "group_value")
+    @Column(name = "group_value", nullable = false)
     private Integer groupValue;
-    @Column(name = "group_desc")
+    @Column(name = "group_desc", nullable = false)
     private String groupDesc;
+    @Column(name = "status", nullable = false)
     private Boolean status;
-    @Column(name = "created_ts")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdTime;
-    @Column(name = "updated_ts")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
 
     public Byte getGroupId() {
         return groupId;
@@ -66,22 +61,6 @@ public class UserGroupsEntity {
         this.status = status;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,6 +90,6 @@ public class UserGroupsEntity {
                 ", groupValue=" + groupValue +
                 ", groupDesc='" + groupDesc + '\'' +
                 ", status=" + status +
-                '}';
+                "} " + super.toString();
     }
 }
