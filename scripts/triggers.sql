@@ -27,7 +27,7 @@ BEFORE INSERT ON user_groups
 FOR EACH ROW
   BEGIN
     SELECT
-      current_timestamp,current_timestamp INTO :new.create_ts, :new.updated_ts
+      current_timestamp,current_timestamp INTO :new.created_ts, :new.updated_ts
     FROM   dual;
   END;
 /
