@@ -25,6 +25,12 @@ public class UserEntity extends BaseEntity {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
+    @OneToMany(mappedBy = "userId")
+    private List<UserRoleEntity> userRole;
+
+    @OneToMany(mappedBy = "userId")
+    private List<UserLoginEntity> userLogin;
+
     public String getUserId() {
         return userId;
     }
@@ -79,6 +85,22 @@ public class UserEntity extends BaseEntity {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public List<UserRoleEntity> getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(List<UserRoleEntity> userRole) {
+        this.userRole = userRole;
+    }
+
+    public List<UserLoginEntity> getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(List<UserLoginEntity> userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override

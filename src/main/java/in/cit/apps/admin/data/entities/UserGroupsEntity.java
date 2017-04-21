@@ -11,7 +11,7 @@ import java.util.Date;
 public class UserGroupsEntity extends BaseEntity {
     @Id
     @Column(name = "group_id")
-    private Byte groupId;
+    private Integer groupId;
     @Column(name = "group_name", nullable = false)
     private String groupName;
     @Column(name = "group_value", nullable = false)
@@ -21,11 +21,11 @@ public class UserGroupsEntity extends BaseEntity {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
-    public Byte getGroupId() {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Byte groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
