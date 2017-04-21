@@ -27,8 +27,8 @@ public class UserRoleEntity extends BaseEntity {
     @JoinColumn(name = "group_id")
     private UserGroupsEntity groupId;
 
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive;
+    @Column(name = "status", nullable = false)
+    private Boolean status;
 
     public Integer getId() {
         return id;
@@ -55,10 +55,10 @@ public class UserRoleEntity extends BaseEntity {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return status;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(Boolean status) {
+        this.status = status;
     }
 }

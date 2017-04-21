@@ -1,7 +1,11 @@
 package in.cit.apps.admin.service;
 
+import in.cit.apps.admin.exceptions.InvalidCredentialException;
+import in.cit.apps.admin.model.LoginData;
+
 /**
  * Created by Prabhat on 4/18/2017.
  */
-public class LoginService {
+public interface LoginService {
+    boolean isValidLogin(LoginData loginData) throws InvalidCredentialException;
 }

@@ -17,7 +17,7 @@ import javax.persistence.*;
  * );
  */
 @Entity
-@Table(name = "user_login", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "login_name"}))
+@Table(name = "user_login", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id"}))
 public class UserLoginEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_generator")

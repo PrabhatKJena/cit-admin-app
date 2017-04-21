@@ -53,15 +53,15 @@ public class StaticDataLoader {
 
     private void test() {
         try {
-            UserEntity userEntity = usersRepository.findByUserId("U0002");
-            /*UserLoginEntity entity = new UserLoginEntity();
+            UserEntity userEntity = usersRepository.findByUserId("U0001");
+            UserLoginEntity entity = new UserLoginEntity();
             entity.setUserId(userEntity);
             entity.setLoginName("prajena");
             entity.setLoginPwd("pwd");
             entity.setStatus(true);
             userLoginRepository.save(entity);
             List<UserLoginEntity> all = userLoginRepository.findAll();
-            System.out.println(all);*/
+            System.out.println(all);
 
             UserGroupsEntity groupsEntity = userGroupsRepository.findByGroupName("ADMIN");
             UserRoleEntity roleEntity = new UserRoleEntity();

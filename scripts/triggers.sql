@@ -40,9 +40,16 @@ FOR EACH ROW
   DECLARE
     last_id users.user_id%TYPE;
     last_id_n NUMBER;
+    rec_count NUMBER;
   BEGIN
-    select TO_NUMBER(substr(USER_ID,2))INTO last_id_n from USERS where CREATED_TS = (SELECT max(CREATED_TS) from USERS);
-    select ('U'||lpad(NVL(last_id_n,0)+1,4,'0')) INTO last_id from dual;
+    SELECT count(1) INTO rec_count FROM USERS;
+    IF rec_count = 0
+    THEN
+      last_id_n:=0;
+    ELSE
+      select TO_NUMBER(substr(USER_ID,2))INTO last_id_n from USERS where CREATED_TS = (SELECT max(CREATED_TS) from USERS);
+    END IF;
+    select ('U'||lpad(last_id_n+1,4,'0')) INTO last_id from dual;
     SELECT last_id
     INTO   :new.USER_ID
     FROM   dual;

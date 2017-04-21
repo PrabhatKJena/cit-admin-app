@@ -22,8 +22,8 @@ public class UserEntity extends BaseEntity {
     private String email;
     @Column(name = "phone", nullable = false)
     private Long phone;
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive;
+    @Column(name = "status", nullable = false)
+    private Boolean status;
 
     @OneToMany(mappedBy = "id")
     private List<UserRoleEntity> userRole;
@@ -80,11 +80,11 @@ public class UserEntity extends BaseEntity {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return status;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(Boolean status) {
+        status = status;
     }
 
     public List<UserRoleEntity> getUserRole() {
@@ -112,7 +112,7 @@ public class UserEntity extends BaseEntity {
                 ", sex=" + sex +
                 ", email='" + email + '\'' +
                 ", phone=" + phone +
-                ", isActive=" + isActive +
+                ", status=" + status +
                 "} " + super.toString();
     }
 
@@ -129,7 +129,7 @@ public class UserEntity extends BaseEntity {
         if (!sex.equals(that.sex)) return false;
         if (!email.equals(that.email)) return false;
         if (!phone.equals(that.phone)) return false;
-        return isActive.equals(that.isActive);
+        return status.equals(that.status);
 
     }
 
@@ -141,7 +141,7 @@ public class UserEntity extends BaseEntity {
         result = 31 * result + sex.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + phone.hashCode();
-        result = 31 * result + isActive.hashCode();
+        result = 31 * result + status.hashCode();
         return result;
     }
 }
