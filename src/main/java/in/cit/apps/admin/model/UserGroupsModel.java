@@ -18,7 +18,7 @@ public final class UserGroupsModel {
         return new ArrayList<>(records);
     }
 
-    public void setRecords(List<UserGroupsEntity> records) {
+    public void setEntries(List<UserGroupsEntity> records) {
         this.records = new ArrayList<>(records);
     }
 

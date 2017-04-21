@@ -3,12 +3,12 @@ package in.cit.apps.admin.data.dao;
 import in.cit.apps.admin.data.entities.UserEntity;
 import in.cit.apps.admin.data.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Prabhat on 4/21/2017.
  */
-@Repository
+@Component
 public class UserDAO {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired

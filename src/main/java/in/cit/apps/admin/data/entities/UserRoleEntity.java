@@ -1,9 +1,6 @@
 package in.cit.apps.admin.data.entities;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Prabhat on 4/21/2017.
@@ -15,19 +12,46 @@ import javax.persistence.Table;
  * updated_ts DATE        NOT NULL
  */
 @Entity
-@Table(name = "user_role")
+@Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "group_id"}))
 public class UserRoleEntity extends BaseEntity {
-    @EmbeddedId
-    private UserRoleId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_login_id_generator")
+    @SequenceGenerator(name = "user_login_id_generator", sequenceName = "user_login_seq", initialValue = 1, allocationSize = 10)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userId;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private UserGroupsEntity groupId;
+
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    public UserRoleId getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UserRoleId id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public UserEntity getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserEntity userId) {
+        this.userId = userId;
+    }
+
+    public UserGroupsEntity getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(UserGroupsEntity groupId) {
+        this.groupId = groupId;
     }
 
     public Boolean getActive() {

@@ -25,10 +25,10 @@ public class UserEntity extends BaseEntity {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "id")
     private List<UserRoleEntity> userRole;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "id")
     private List<UserLoginEntity> userLogin;
 
     public String getUserId() {

@@ -9,5 +9,6 @@ import java.util.List;
  * Created by Prabhat on 4/20/2017.
  */
 public interface UserGroupsRepository extends JpaRepository<UserGroupsEntity, Byte> {
-    public List<UserGroupsEntity> findAll();
+    public UserGroupsEntity findByGroupName(String groupName);
 }
+

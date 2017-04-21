@@ -1,5 +1,7 @@
 package in.cit.apps.admin.data.entities;
 
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.*;
 
 /**
@@ -15,26 +17,48 @@ import javax.persistence.*;
  * );
  */
 @Entity
-@Table(name = "user_login")
+@Table(name = "user_login", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "login_name"}))
 public class UserLoginEntity extends BaseEntity {
-    @EmbeddedId
-    private UserLoginId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_generator")
+    @SequenceGenerator(name = "user_id_generator", sequenceName = "user_login_seq", initialValue = 1, allocationSize = 10)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userId;
+
+    @Column(name = "login_name", nullable = false)
+    private String loginName;
 
     @Column(name = "login_pwd", nullable = false)
     private String loginPwd;
 
-    @ManyToOne(targetEntity = UserEntity.class)
-    private UserGroupsEntity userGroupsEntity;
-
     @Column(name = "status", nullable = false)
     private Boolean status;
 
-    public UserLoginId getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UserLoginId id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public UserEntity getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserEntity userId) {
+        this.userId = userId;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     public String getLoginPwd() {
@@ -43,14 +67,6 @@ public class UserLoginEntity extends BaseEntity {
 
     public void setLoginPwd(String loginPwd) {
         this.loginPwd = loginPwd;
-    }
-
-    public UserGroupsEntity getUserGroupsEntity() {
-        return userGroupsEntity;
-    }
-
-    public void setUserGroupsEntity(UserGroupsEntity userGroupsEntity) {
-        this.userGroupsEntity = userGroupsEntity;
     }
 
     public Boolean getStatus() {

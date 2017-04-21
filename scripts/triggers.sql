@@ -33,6 +33,22 @@ FOR EACH ROW
 /
 
 -- Triggers for USERS table
+-- Will generate user_id from U0001 to U9999
+CREATE OR REPLACE TRIGGER users_generator
+BEFORE INSERT ON users
+FOR EACH ROW
+  DECLARE
+    last_id users.user_id%TYPE;
+    last_id_n NUMBER;
+  BEGIN
+    select TO_NUMBER(substr(USER_ID,2))INTO last_id_n from USERS where CREATED_TS = (SELECT max(CREATED_TS) from USERS);
+    select ('U'||lpad(NVL(last_id_n,0)+1,4,'0')) INTO last_id from dual;
+    SELECT last_id
+    INTO   :new.USER_ID
+    FROM   dual;
+  END;
+/
+
 CREATE OR REPLACE TRIGGER USERS_UPDATE_TRIGGER
 BEFORE UPDATE ON USERS
 FOR EACH ROW
@@ -48,7 +64,7 @@ BEFORE INSERT ON USERS
 FOR EACH ROW
   BEGIN
     SELECT
-      current_timestamp,current_timestamp INTO :new.create_ts, :new.updated_ts
+      current_timestamp,current_timestamp INTO :new.created_ts, :new.updated_ts
     FROM   dual;
   END;
 /
@@ -69,7 +85,29 @@ BEFORE INSERT ON USER_LOGIN
 FOR EACH ROW
   BEGIN
     SELECT
-      current_timestamp,current_timestamp INTO :new.create_ts, :new.updated_ts
+      current_timestamp,current_timestamp INTO :new.created_ts, :new.updated_ts
     FROM   dual;
   END;
 /
+
+-- Trigger for USER_ROLE table
+CREATE OR REPLACE TRIGGER USERS_ROLE_UPDATE_TRIGGER
+BEFORE UPDATE ON USER_ROLE
+FOR EACH ROW
+  BEGIN
+    SELECT current_timestamp
+    INTO   :new.updated_ts
+    FROM   dual;
+  END;
+/
+
+CREATE OR REPLACE TRIGGER USER_ROLE_INSERT_TRIGGER
+BEFORE INSERT ON USER_ROLE
+FOR EACH ROW
+  BEGIN
+    SELECT
+      current_timestamp,current_timestamp INTO :new.created_ts, :new.updated_ts
+    FROM   dual;
+  END;
+/
+
