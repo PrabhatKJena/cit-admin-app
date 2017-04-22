@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface UserGroupsRepository extends JpaRepository<UserGroupsEntity, Byte> {
     public UserGroupsEntity findByGroupName(String groupName);
+    public List<UserGroupsEntity> findAllByStatus(Boolean status);
 }
 

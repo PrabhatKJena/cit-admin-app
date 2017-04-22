@@ -1,39 +1,44 @@
 package in.cit.apps.admin.model.enums;
 
-import java.util.Arrays;
-import java.util.Set;
+import in.cit.apps.admin.model.LoginData;
+import in.cit.apps.admin.model.UserGroupsType;
+
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static in.cit.apps.admin.model.UserGroupsType.*;
 
 /**
  * Created by Prabhat on 4/20/2017.
  */
 public enum ResourceType {
-    HOME("Home", 7, "/home"),
-    CLIENT_ONBOARD("ClientOnboard", 7, "/clientOnboard"),
-    CONSULTANT_ONBOARD("ConsultantOnboard", 7, "/consultantOnboard"),
-    FINANCE_CREDIT("FinanceCredit", 4, "/finInReport"),
-    FINANCE_DEBIT("FinanceDebit", 4, "/finOutReport"),
-    FINANCE_REPORT("FinanceReport", 4, "/finReport");
+    HOME("Home", "/home", UserGroupsType.values()),
+    CLIENT_ONBOARD("ClientOnboard", "/clientOnboard", RECRUITER, ADMIN),
+    CONSULTANT_ONBOARD("ConsultantOnboard", "/consultantOnboard", RECRUITER, ADMIN),
+    FINANCE_CREDIT("FinanceCredit", "/finInReport", FINANCE, ADMIN),
+    FINANCE_DEBIT("FinanceDebit", "/finOutReport", FINANCE, ADMIN),
+    FINANCE_REPORT("FinanceReport", "/finReport", FINANCE, ADMIN);
+
+    private static Map<String, ResourceType> resourcePathMap;
+
+    static {
+        // Storing all paths into EnumMap for faster validation
+        resourcePathMap = Arrays.stream(ResourceType.values()).collect(Collectors.toMap(resourceType -> resourceType.getPath(), resourceType -> resourceType));
+        System.out.println("Resource Type Map STATIC >>>>> " + resourcePathMap);
+    }
 
     private String name;
     private Integer value;
     private String path;
 
-    private static Set<String> resourcePathSet;
-
-    static {
-        // Storing all paths into Set
-        resourcePathSet = Arrays.stream(ResourceType.values()).map(resourceType -> resourceType.path).collect(Collectors.toSet());
-    }
-
-    ResourceType(String name, Integer value, String path) {
+    ResourceType(String name, String path, UserGroupsType... types) {
         this.name = name;
-        this.value = value;
+        this.value = Arrays.stream(types).mapToInt(type -> type.getGroupValue()).reduce((value1, value2) -> value1 ^ value2).orElse(0);
         this.path = path;
     }
 
     public boolean isValid(String path) {
-        return resourcePathSet.contains(path);
+        return resourcePathMap.containsKey(path);
     }
 
     public ResourceType forPath(String path) {
@@ -64,5 +69,9 @@ public enum ResourceType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean hasAccess(LoginData loginData, ResourceType resource) {
+        return (loginData.getGroupValue() & resource.getValue()) > 0;
     }
 }

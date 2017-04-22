@@ -20,7 +20,7 @@ END;
 CREATE TABLE user_groups (
   group_id    NUMBER(3) PRIMARY KEY,
   group_name  VARCHAR2(16) NOT NULL,
-  group_value NUMBER(2)    NOT NULL,
+  --group_value NUMBER(2)    NOT NULL,
   group_desc  VARCHAR2(80),
   status      NUMBER(1) DEFAULT 1,
   created_ts  DATE         NOT NULL,
@@ -28,7 +28,6 @@ CREATE TABLE user_groups (
 );
 
 ALTER TABLE user_groups ADD CONSTRAINT user_groups_grp_name_u UNIQUE (group_name);
-ALTER TABLE user_groups ADD CONSTRAINT user_groups_grp_value_u UNIQUE (group_value);
 ALTER TABLE user_groups ADD CONSTRAINT user_groups_status_chk CHECK( status in (0,1));
 
 -- USERS table DDL

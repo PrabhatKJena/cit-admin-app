@@ -1,7 +1,5 @@
 package in.cit.apps.admin.data.entities;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 
 /**
@@ -26,7 +24,7 @@ public class UserLoginEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity userId;
+    private UserEntity userEntity;
 
     @Column(name = "login_name", nullable = false)
     private String loginName;
@@ -45,12 +43,12 @@ public class UserLoginEntity extends BaseEntity {
         this.id = id;
     }
 
-    public UserEntity getUserId() {
-        return userId;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setUserId(UserEntity userId) {
-        this.userId = userId;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public String getLoginName() {

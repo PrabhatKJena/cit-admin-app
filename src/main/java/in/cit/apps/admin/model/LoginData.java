@@ -1,14 +1,22 @@
 package in.cit.apps.admin.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * Created by Prabhat on 4/18/2017.
  */
 public class LoginData {
+    @Size(min = 4, max = 16)
+    @NotNull(message = "${msg.empty.username}")
     private String userName;
+
+    @Size(min = 4, max = 16)
+    @NotNull(message = "${msg.empty.userpwd}")
     private String userCredential;
-    private List<Integer> userGroupIds;
+
+    private Integer groupValue;
 
     public String getUserName() {
         return userName;
@@ -26,11 +34,11 @@ public class LoginData {
         this.userCredential = userCredential;
     }
 
-    public void setUserGroupIds(List<Integer> userGroupIds) {
-        this.userGroupIds = userGroupIds;
+    public Integer getGroupValue() {
+        return groupValue;
     }
 
-    public List<Integer> getUserGroupIds() {
-        return userGroupIds;
+    public void setGroupValue(Integer groupValue) {
+        this.groupValue = groupValue;
     }
 }

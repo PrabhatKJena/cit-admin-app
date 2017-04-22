@@ -8,11 +8,12 @@ import in.cit.apps.admin.data.repo.UserGroupsRepository;
 import in.cit.apps.admin.data.repo.UserLoginRepository;
 import in.cit.apps.admin.data.repo.UserRoleRepository;
 import in.cit.apps.admin.data.repo.UsersRepository;
-import in.cit.apps.admin.model.UserGroupsModel;
+import in.cit.apps.admin.model.UserGroupsType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,42 +21,41 @@ import java.util.List;
  */
 @Component
 public class StaticDataLoader {
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserGroupsRepository userGroupsRepository;
 
     @Autowired
-    private UserGroupsModel userGroupsModel;
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    @Autowired
     private UserLoginRepository userLoginRepository;
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UsersRepository usersRepository;
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserRoleRepository userRoleRepository;
 
 
     @PostConstruct
+    public void init() {
+        loadUserGroups();
+
+        test();
+    }
+
     public void loadUserGroups() {
         List<UserGroupsEntity> entities = userGroupsRepository.findAll();
         for (UserGroupsEntity entity : entities) {
-            System.out.println(entity);
+            UserGroupsType.forName(entity.getGroupName()).setData(entity.getGroupId());
         }
-        userGroupsModel.setEntries(entities);
+        System.out.println("All User Groups >>>>>>>>>> ");
+        Arrays.stream(UserGroupsType.values()).forEach(userGroupsType -> System.out.println(userGroupsType));
 
-        test();
     }
 
     private void test() {
         try {
             UserEntity userEntity = usersRepository.findByUserId("U0001");
             UserLoginEntity entity = new UserLoginEntity();
-            entity.setUserId(userEntity);
+            entity.setUserEntity(userEntity);
             entity.setLoginName("prajena");
             entity.setLoginPwd("pwd");
             entity.setStatus(true);

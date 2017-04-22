@@ -11,7 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserLoginRepository extends JpaRepository<UserLoginEntity, Integer> {
-    public UserLoginEntity findByUserId(String userId);
-
     public UserLoginEntity findByLoginNameAndLoginPwdAndStatus(String loginName, String loginPwd, boolean status);
 }

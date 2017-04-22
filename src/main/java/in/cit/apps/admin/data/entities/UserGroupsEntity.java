@@ -14,8 +14,8 @@ public class UserGroupsEntity extends BaseEntity {
     private Integer groupId;
     @Column(name = "group_name", nullable = false)
     private String groupName;
-    @Column(name = "group_value", nullable = false)
-    private Integer groupValue;
+    /*@Column(name = "group_value", nullable = false)
+    private Integer groupValue;*/
     @Column(name = "group_desc", nullable = false)
     private String groupDesc;
     @Column(name = "status", nullable = false)
@@ -37,14 +37,6 @@ public class UserGroupsEntity extends BaseEntity {
         this.groupName = groupName;
     }
 
-    public Integer getGroupValue() {
-        return groupValue;
-    }
-
-    public void setGroupValue(Integer groupValue) {
-        this.groupValue = groupValue;
-    }
-
     public String getGroupDesc() {
         return groupDesc;
     }
@@ -62,34 +54,30 @@ public class UserGroupsEntity extends BaseEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserGroupsEntity entity = (UserGroupsEntity) o;
-
-        if (!groupId.equals(entity.groupId)) return false;
-        if (!groupName.equals(entity.groupName)) return false;
-        return groupValue.equals(entity.groupValue);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = groupId.hashCode();
-        result = 31 * result + groupName.hashCode();
-        result = 31 * result + groupValue.hashCode();
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "UserGroupsEntity{" +
                 "groupId=" + groupId +
                 ", groupName='" + groupName + '\'' +
-                ", groupValue=" + groupValue +
                 ", groupDesc='" + groupDesc + '\'' +
                 ", status=" + status +
-                "} " + super.toString();
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserGroupsEntity that = (UserGroupsEntity) o;
+
+        if (groupId != null ? !groupId.equals(that.groupId) : that.groupId != null) return false;
+        return groupName != null ? groupName.equals(that.groupName) : that.groupName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = groupId != null ? groupId.hashCode() : 0;
+        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        return result;
     }
 }

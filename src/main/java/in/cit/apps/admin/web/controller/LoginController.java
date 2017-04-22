@@ -1,30 +1,36 @@
 package in.cit.apps.admin.web.controller;
 
 import in.cit.apps.admin.model.LoginData;
-import org.springframework.beans.factory.annotation.Value;
+import in.cit.apps.admin.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.Map;
 
 /**
  * Created by Prabhat on 4/18/2017.
  */
 @Controller
 public class LoginController {
-    @Value("${cit.uname:UNKNOWN}")
-    private String uname;
+
+    /*@Value("${cit.uname:UNKNOWN}")
+    private String uname;*/
+
+    @Autowired
+    LoginService loginService;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET})
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("loginData", new LoginData());
         return "Login";
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
-    public String login(@RequestAttribute LoginData loginData) {
-
+    public String login(@ModelAttribute("loginData") LoginData loginData, BindingResult bindingResult) {
+        System.out.println(loginData);
         return "Login";
     }
 }
