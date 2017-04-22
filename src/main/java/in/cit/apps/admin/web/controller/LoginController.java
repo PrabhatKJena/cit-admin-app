@@ -1,5 +1,6 @@
 package in.cit.apps.admin.web.controller;
 
+import in.cit.apps.admin.exceptions.InvalidUserDataException;
 import in.cit.apps.admin.model.LoginData;
 import in.cit.apps.admin.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,21 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @RequestMapping(value = "/login", method = {RequestMethod.GET})
+    @RequestMapping(value = "/", method = {RequestMethod.GET})
     public String login(Model model) {
         model.addAttribute("loginData", new LoginData());
-        return "Login";
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     public String login(@ModelAttribute("loginData") LoginData loginData, BindingResult bindingResult) {
         System.out.println(loginData);
-        return "Login";
+        try {
+            loginService.validateLogin(loginData);
+            return "home";
+        } catch (InvalidUserDataException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 }

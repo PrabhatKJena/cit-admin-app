@@ -27,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
     private Messages messages;
 
     @Override
-    public boolean isValidLogin(LoginData loginData) throws InvalidUserDataException {
+    public void validateLogin(LoginData loginData) throws InvalidUserDataException {
         UserLoginEntity loginEntity = userLoginRepository.findByLoginNameAndLoginPwdAndStatus(loginData.getUserName(), loginData.getUserCredential(), true);
         if (loginEntity == null) {
             throw new InvalidUserDataException(messages.get("error.invalid.login"));
@@ -36,6 +36,5 @@ public class LoginServiceImpl implements LoginService {
             throw new InvalidUserDataException(messages.get("error.notfound.user"));
         }
 //        UserRoleEntity userRole = userRoleRepository.findByUserId(loginEntity.getUserEntity().getUserId());
-        return true;
     }
 }
