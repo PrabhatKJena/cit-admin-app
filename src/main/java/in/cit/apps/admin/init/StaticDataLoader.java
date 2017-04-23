@@ -53,7 +53,16 @@ public class StaticDataLoader {
 
     private void testDataLoader() {
         try {
-            UserEntity userEntity = usersRepository.findByUserId("U0001");
+
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUserFName("Prabat");
+            userEntity.setUserLName("Jena");
+            userEntity.setActive(true);
+            userEntity.setEmail("ppp@pcom");
+            userEntity.setPhone(1111L);
+            userEntity.setSex('M');
+            userEntity = usersRepository.save(userEntity);
+
             UserLoginEntity entity = new UserLoginEntity();
             entity.setUserEntity(userEntity);
             entity.setLoginName("prajena");
