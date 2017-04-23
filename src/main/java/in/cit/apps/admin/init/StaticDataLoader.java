@@ -57,7 +57,7 @@ public class StaticDataLoader {
             UserEntity userEntity = new UserEntity();
             userEntity.setUserFName("Prabat");
             userEntity.setUserLName("Jena");
-            userEntity.setActive(true);
+            userEntity.setStatus(true);
             userEntity.setEmail("ppp@pcom");
             userEntity.setPhone(1111L);
             userEntity.setSex('M');

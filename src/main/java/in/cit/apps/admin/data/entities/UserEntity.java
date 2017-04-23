@@ -1,5 +1,8 @@
 package in.cit.apps.admin.data.entities;
 
+import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,8 +13,10 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
     @Id
+    //@GeneratedValue(generator = "id_generator")
+    //@GenericGenerator(name = "id_generator", strategy = GeneratorType.AUTO)
     @Column(name = "user_id")
-    private String userId;
+    private String userId = "U0000"; // Assigned dummy value, which will be updated by oracle trigger before insert
     @Column(name = "user_fname", nullable = false)
     private String userFName;
     @Column(name = "user_lname")
@@ -79,12 +84,12 @@ public class UserEntity extends BaseEntity {
         this.phone = phone;
     }
 
-    public Boolean getActive() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setActive(Boolean status) {
-        status = status;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public List<UserRoleEntity> getUserRole() {
