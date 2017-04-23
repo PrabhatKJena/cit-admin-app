@@ -121,7 +121,6 @@
             width: 240px;
             height: 35px;
             display: block;
-            font-family: Arial, "Helvetica", sans-serif;
             font-size: 16px;
             font-weight: bold;
             color: #fff;

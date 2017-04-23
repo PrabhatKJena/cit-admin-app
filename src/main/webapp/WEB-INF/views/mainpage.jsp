@@ -6,7 +6,6 @@
     <style>
         h1 {
             color: white;
-            font-family: verdana;
             font-size: 300%;
         }
 

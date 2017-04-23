@@ -21,6 +21,7 @@
         <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
     </definition>
 
+    <!-- Consultant onboard page -->
     <definition name="onboard" extends="base-definition">
         <put-attribute name="title" value="On-board"/>
         <put-attribute name="body" value="/WEB-INF/views/consultant_summary.jsp"/>

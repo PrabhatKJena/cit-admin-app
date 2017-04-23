@@ -3,22 +3,6 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>home page</title>
-    <style>
-        h1 {
-            color: white;
-            font-family: verdana;
-            font-size: 300%;
-
-        }
-
-        .header-design {
-            padding: 1em;
-            color: white;
-            background-color: #F4D03F;
-            clear: left;
-
-        }
-    </style>
 </head>
 <body>
 Home Page
