@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     @RequestMapping(value = "/home")
     public String home() {
-        return TemplateEnum.ONBOARD.getTemplate();
+        return TemplateEnum.HOME.getTemplate();
     }
 
     @RequestMapping(value = "/onboard")

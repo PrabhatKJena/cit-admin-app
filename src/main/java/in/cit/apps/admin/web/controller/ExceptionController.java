@@ -41,10 +41,11 @@ public class ExceptionController {
     }
 
     // Total control - setup a model and return the view name yourself. Or
-    // consider subclassing ExceptionHandlerExceptionResolver (see below).
+    // consider sub classing ExceptionHandlerExceptionResolver (see below).
     @ExceptionHandler(Exception.class)
     public String handleError(HttpServletRequest req, Exception ex) {
         //logger.error("Request: " + req.getRequestURL() + " raised " + ex);
+        System.err.println("Request: " + req.getRequestURL() + " raised " + ex);
         return TemplateEnum.ERROR.getTemplate();
     }
 
