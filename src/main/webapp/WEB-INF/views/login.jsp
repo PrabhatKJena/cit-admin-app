@@ -1,8 +1,12 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="cor" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<title>Login Page</title>
+<title><tiles:getAsString name="title"/></title>
 <head>
     <style type="text/css">
         html {
@@ -183,6 +187,10 @@
     font-weight:bold;font-size: 22px;font-style: italic;">Sign in to consult-IT
     </div>
     <div class="login">
+        <core:if test="${not empty ERROR_MSG}">
+            <core:out value="${ERROR_MSG}"></core:out>
+        </core:if>
+
         <form:input path="userName" id="username"/>
             <%--<input type="text" placeholder="Username" id="username">--%>
         <form:password path="userCredential" id="password"/>

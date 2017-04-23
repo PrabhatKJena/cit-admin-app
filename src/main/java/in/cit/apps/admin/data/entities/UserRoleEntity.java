@@ -21,11 +21,11 @@ public class UserRoleEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity userId;
+    private UserEntity userEntity;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private UserGroupsEntity groupId;
+    private UserGroupsEntity groupsEntity;
 
     @Column(name = "status", nullable = false)
     private Boolean status;
@@ -38,20 +38,12 @@ public class UserRoleEntity extends BaseEntity {
         this.id = id;
     }
 
-    public UserEntity getUserId() {
-        return userId;
+    public UserGroupsEntity getGroupsEntity() {
+        return groupsEntity;
     }
 
-    public void setUserId(UserEntity userId) {
-        this.userId = userId;
-    }
-
-    public UserGroupsEntity getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(UserGroupsEntity groupId) {
-        this.groupId = groupId;
+    public void setGroupsEntity(UserGroupsEntity groupsEntity) {
+        this.groupsEntity = groupsEntity;
     }
 
     public Boolean getActive() {
@@ -59,6 +51,22 @@ public class UserRoleEntity extends BaseEntity {
     }
 
     public void setActive(Boolean status) {
+        this.status = status;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 }

@@ -38,7 +38,7 @@ public class StaticDataLoader {
     public void init() {
         loadUserGroups();
 
-        test();
+        testDataLoader();
     }
 
     public void loadUserGroups() {
@@ -51,7 +51,7 @@ public class StaticDataLoader {
 
     }
 
-    private void test() {
+    private void testDataLoader() {
         try {
             UserEntity userEntity = usersRepository.findByUserId("U0001");
             UserLoginEntity entity = new UserLoginEntity();
@@ -65,10 +65,19 @@ public class StaticDataLoader {
 
             UserGroupsEntity groupsEntity = userGroupsRepository.findByGroupName("ADMIN");
             UserRoleEntity roleEntity = new UserRoleEntity();
-            roleEntity.setUserId(userEntity);
-            roleEntity.setActive(false);
-            roleEntity.setGroupId(groupsEntity);
+            roleEntity.setUserEntity(userEntity);
+            roleEntity.setActive(true);
+            roleEntity.setGroupsEntity(groupsEntity);
             userRoleRepository.save(roleEntity);
+
+            groupsEntity = userGroupsRepository.findByGroupName("FINANCE");
+            roleEntity = new UserRoleEntity();
+            roleEntity.setUserEntity(userEntity);
+            roleEntity.setActive(true);
+            roleEntity.setGroupsEntity(groupsEntity);
+            userRoleRepository.save(roleEntity);
+
+
             List<UserRoleEntity> all1 = userRoleRepository.findAll();
             System.out.println(all1);
 

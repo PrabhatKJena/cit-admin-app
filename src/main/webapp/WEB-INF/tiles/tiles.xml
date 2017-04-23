@@ -15,19 +15,37 @@
     </definition>
 
     <!-- Home Page -->
-    <definition name="home" extends="base-definition">
+    <definition name="home-template" extends="base-definition">
         <put-attribute name="title" value="Home"/>
         <put-attribute name="body" value="/WEB-INF/views/homepage.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
     </definition>
 
     <!-- Consultant onboard page -->
-    <definition name="onboard" extends="base-definition">
+    <definition name="onboard-template" extends="base-definition">
         <put-attribute name="title" value="On-board"/>
         <put-attribute name="body" value="/WEB-INF/views/consultant_summary.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
     </definition>
 
+    <!-- Consultant Financial page -->
+    <definition name="financial-template" extends="base-definition">
+        <put-attribute name="title" value="On-board"/>
+        <put-attribute name="body" value="/WEB-INF/views/consultant_summary.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
+    </definition>
+
+    <!-- User login page -->
+    <definition name="login-template" template="/WEB-INF/views/login.jsp">
+        <put-attribute name="title" value="Login"/>
+    </definition>
+
+    <!-- Consultant error page -->
+    <definition name="error-template" extends="base-definition">
+        <put-attribute name="title" value="On-board"/>
+        <put-attribute name="body" value="/WEB-INF/views/error.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
+    </definition>
     <!--&lt;!&ndash; Product Page &ndash;&gt;
     <definition name="products" extends="base-definition">
         <put-attribute name="title" value="Products"/>
