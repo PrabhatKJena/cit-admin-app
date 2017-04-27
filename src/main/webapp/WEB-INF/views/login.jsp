@@ -61,8 +61,8 @@
             box-sizing: border-box;
             color: #696969;
             height: 39px;
-            margin: 31px 0 0 29px;
-            padding-left: 37px;
+            margin: 10px 0 0 29px;
+            padding-left: 5px;
             transition: box-shadow 0.3s;
             width: 240px;
         }
@@ -174,26 +174,43 @@
             margin: -7px;
         }
 
+        #username {
+            margin: 5px 0 0 29px !important;
+        }
+
+        .error-div {
+            color: red;
+            margin: 5px 0 0 29px !important;
+            height: 18px;
+        }
     </style>
+    <link href="<c:url value='/static/css/styles.css' />" rel="stylesheet"></link>
 </head>
 <body class="backstyle">
-
 <div class="header">
-    <h1>Consult-IT Enterprise Platform</h1>
+    <h1 class="text-3d">Consult-IT Enterprise Platform</h1>
 </div>
 <div style="height: 100px;"></div>
 <form:form action="./login" method="post" commandName="loginData" name="loginData">
-    <div style="text-align: center;color:#2d2c2c;
+    <%--<div style="text-align: center;color:#2d2c2c;
     font-weight:bold;font-size: 22px;font-style: italic;">Sign in to consult-IT
-    </div>
+    </div>--%>
     <div class="login">
-        <core:if test="${not empty ERROR_MSG}">
-            <core:out value="${ERROR_MSG}"></core:out>
-        </core:if>
+        <div id="errorDiv" class="error-div">
+            <core:if test="${not empty ERROR_MSG}">
+                <core:out value="${ERROR_MSG}"></core:out>
+            </core:if>
+        </div>
 
         <form:input path="userName" id="username"/>
+        <div class="error-div">
+            <form:errors path="userName"/>
+        </div>
             <%--<input type="text" placeholder="Username" id="username">--%>
         <form:password path="userCredential" id="password"/>
+        <div class="error-div">
+            <form:errors path="userCredential"/>
+        </div>
             <%--<input type="password" placeholder="password" id="password">--%>
         <a href="#" class="forgot">forgot password?</a>
         <input type="submit" value="Sign In">

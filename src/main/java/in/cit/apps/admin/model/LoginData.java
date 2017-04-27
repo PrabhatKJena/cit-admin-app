@@ -8,12 +8,10 @@ import java.util.List;
  * Created by Prabhat on 4/18/2017.
  */
 public class LoginData {
-    @Size(min = 4, max = 16)
-    @NotNull(message = "${msg.empty.username}")
+    @Size(min = 4, max = 16, message = "{msg.size.username}")
     private String userName;
 
-    @Size(min = 4, max = 16)
-    @NotNull(message = "${msg.empty.userpwd}")
+    @Size(min = 3, max = 16, message = "{msg.size.userpwd}")
     private String userCredential;
 
     private Integer groupValue;

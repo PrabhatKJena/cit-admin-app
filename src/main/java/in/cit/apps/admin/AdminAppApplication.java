@@ -10,12 +10,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+
+import javax.validation.Validator;
 
 @ComponentScan(value = {"in.cit.apps.admin"})
 @EnableAutoConfiguration
@@ -43,21 +46,6 @@ public class AdminAppApplication extends SpringBootServletInitializer {
         resolver.setViewClass(TilesView.class);
         return resolver;
     }
-    @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/i18n/messages");
-        return messageSource;
-    }
-   /* @Bean
-    public LocaleResolver localeResolver() {
-        return new CookieLocaleResolver();
-    }*/
-
-    /*@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static*//**").addResourceLocations("/static/");
-    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(AdminAppApplication.class, args);
